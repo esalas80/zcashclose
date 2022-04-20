@@ -109,6 +109,7 @@ sap.ui.define([
 			var tableModel=this._oView.byId("tblClose").getModel("closeCahsModel");
 			if(data.length > 0){
 				for (let i = 0; i < data.length; i++) {
+					debugger
 					tableModel.setProperty("/"+ i +"/SaldoFinal",tableModel.getProperty("/"+ i +"/Importe").trim());
 					tableModel.setProperty("/"+ i +"/ImportePerdido",tableModel.getProperty("/"+ i +"/Importe").trim());
 				}

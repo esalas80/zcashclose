@@ -35,7 +35,7 @@
                                                         <Text text="{closeCahsModel>ImporteMoneda}" wrapping="false"/>
                                                     </t:template>
                                                 </t:Column>
-                                                 <t:Column sortProperty="ViaPago" filterProperty="ViaPago" width="4rem">
+                                                 <t:Column sortProperty="ViaPago" filterProperty="ViaPago" width="5rem">
                                                     <Label text="{i18n>ViaPag}"/>
                                                     <t:template>
                                                         <Text text="{closeCahsModel>ViaPago}" wrapping="false"/>

@@ -17,10 +17,10 @@ sap.ui.define([
 
         onInit : function () {
             var oViewModel;
+           // const i18nResBundle = this.getView().getModel("i18n").getResourceBundle();
             // Model used to manipulate control states
             oViewModel = new JSONModel({});
             this.setModel(oViewModel, "worklistView");
-
         },
         /**
          * Event handler when a table item gets pressed
@@ -114,7 +114,7 @@ sap.ui.define([
                 
             }.bind(this)).catch(function(err){
                 sap.ui.core.BusyIndicator.hide();
-                MessageBox.error("Error:", {
+                MessageBox.error("Error:" + err.responseText, {
                     icon: MessageBox.Icon.ERROR,
                     title: "Error"
                 });
