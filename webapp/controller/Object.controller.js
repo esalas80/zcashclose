@@ -44,7 +44,7 @@ sap.ui.define([
             filters.push({name:"Usuario", values:[userdata.Usuario]});
             var vexpand = "NavIngresos,NavMovimientos"
             var data = await  this._GEToDataV2ajaxComp(oModel,entity, filters, vexpand,"")
-            if(data.d.results){
+            if(data.d.results.length > 0){
                 var anio  = data.d.results[0].Fecha.substring(0,4);
                 var mes  = data.d.results[0].Fecha.substring(4,6);
                 var dia  = data.d.results[0].Fecha.substring(6,8);
@@ -139,6 +139,10 @@ sap.ui.define([
 			}
             oDialog.open();
            
+        },
+        
+        _onGetQueryPrint:function(){
+            this.getRouter().navTo("queryprinter", {}, true);
         }
     });
 

@@ -80,6 +80,7 @@
         "viewPath": "NAMESPACE.zcashclose.view",
         "controlId": "app",
         "controlAggregation": "pages",
+        "transition": "slide",
         "bypassed": {
           "target": [
             "notFound"
@@ -101,6 +102,13 @@
           "target": [
             "object"
           ]
+        },
+        {
+          "pattern": "queryprinter",
+          "name": "queryprinter",
+          "target": [
+            "queryprinter"
+          ]
         }
       ],
       "targets": {
@@ -115,6 +123,12 @@
           "viewId": "object",
           "viewLevel": 2,
           "title": "{i18n>objectViewTitle}"
+        },
+        "queryprinter": {
+          "viewName": "queryprinter",
+          "viewId": "queryprinter",
+          "viewLevel": 3,
+          "title": "{i18n>QueryPrinterViewTitle}"
         },
         "objectNotFound": {
           "viewName": "ObjectNotFound",
