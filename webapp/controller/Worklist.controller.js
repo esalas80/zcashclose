@@ -63,10 +63,8 @@ sap.ui.define([
             var that = this;
             var sociedad = this.getView().byId("help_Society").getTokens().length > 0 ?  this.getView().byId("help_Society").getTokens()[0].getKey() : "";
             var segmento = this.getView().byId("help_Div").getTokens().length > 0 ?  this.getView().byId("help_Div").getTokens()[0].getKey() : "";
-            
             var caja = this.getView().byId("help_Caja").getTokens().length > 0 ?  this.getView().byId("help_Caja").getTokens()[0].getKey() : "";
             
-            caja = caja === ""?this.getView().byId("help_Caja").getValue() : "";
             var usuario = this.getView().byId("idUser").getValue();
             if(sociedad === "" || segmento === "" || caja === "" || usuario === ""){
                 this.getView().byId("help_Society").setValueState("Error");
@@ -90,9 +88,9 @@ sap.ui.define([
                 sap.ui.core.BusyIndicator.hide();
                 var resp = data.d;
                 if(sessionStorage.getItem("UserItems")){
-                    sessionStorage.removeItem("UserItems")
+                    sessionStorage.removeItem("UserItems");
                 } 
-                sessionStorage.setItem("UserItems", JSON.stringify(resp))
+                sessionStorage.setItem("UserItems", JSON.stringify(resp));
                 
                 this.getRouter().navTo("object", {
                     objectId: new Date().getMilliseconds().toString() + this.create_UUID().toString() + new Date().getMilliseconds().toString() + this.create_UUID().toString()
@@ -325,7 +323,6 @@ sap.ui.define([
 			let modelAux = new sap.ui.model.json.JSONModel();
 			model.read("/ZShCajaSet", {
 				success: function (result) {
-                    debugger
 					let dataresponse = result.results
 					modelAux.setData(dataresponse);
 				},
@@ -394,7 +391,7 @@ sap.ui.define([
 			var sQuery = sValue.toUpperCase();
 			var aFilters = new sap.ui.model.Filter({
 				filters: [
-					new sap.ui.model.Filter("Segment", sap.ui.model.FilterOperator.Contains, sValue.toUpperCase())
+					new sap.ui.model.Filter("Caja", sap.ui.model.FilterOperator.Contains, sValue.toUpperCase())
 				],
 				and: false
 			});

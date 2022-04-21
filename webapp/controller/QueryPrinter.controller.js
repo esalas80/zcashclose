@@ -4,8 +4,10 @@ sap.ui.define([
     "sap/ui/core/routing/History",
     "../model/formatter",
     "sap/m/Dialog",
-    "sap/ui/core/Fragment"
-], function (BaseController, JSONModel, History, formatter, Dialog, Fragment) {
+    "sap/ui/core/Fragment",
+    "sap/ui/model/Filter",
+	"sap/ui/model/FilterOperator"
+], function (BaseController, JSONModel, History, formatter, Dialog, Fragment, Filter, FilterOperator) {
     "use strict"
     return BaseController.extend("NAMESPACE.zcashclose.controller.QueryPrinter", {
         formatter: formatter,
@@ -54,61 +56,114 @@ sap.ui.define([
             //var oViewModel = this.getModel("objectView");
         },
         loadQuery: async function(){
-            // var that = this;
-            // var userdata = sessionStorage.getItem("UserItems") ? JSON.parse(sessionStorage.getItem("UserItems")) :  [];
-            // var url = "/sap/opu/odata/sap/Z_CASHBOX_SRV/";
-            // var oModel = new sap.ui.model.odata.v2.ODataModel(url, {
-            //     json: true,
-            //     loadMetadataAsync: true
-            // });
-            // var entity="CierreCajaSet"
-            // var filters=[];
-            // filters.push({name:"Segmento", values:[userdata.Segmento]});
-            // filters.push({name:"Sociedad", values:[userdata.Sociedad]});
-            // filters.push({name:"Caja", values:[userdata.Caja]});
-            // filters.push({name:"Usuario", values:[userdata.Usuario]});
-            // var vexpand = "NavIngresos,NavMovimientos"
-            // var data = await  this._GEToDataV2ajaxComp(oModel,entity, filters, vexpand,"")
-            // debugger
-            // if(data.d.results){
-            //     var anio  = data.d.results[0].Fecha.substring(0,4);
-            //     var mes  = data.d.results[0].Fecha.substring(4,6);
-            //     var dia  = data.d.results[0].Fecha.substring(6,8);
-            //     var toDay = dia +"-" + mes + "-" +anio ;
-            //     data.d.results[0].FechaFact = toDay;
-            //     if(data.d.results[0].NavIngresos.results.length > 0){ 
-            //         var sumImporte =0.00 ; 
-            //         var sumImporteML=0.00;
-            //         var impMoneda="";
-            //         for (var i=0; i < data.d.results[0].NavIngresos.results.length; i++){
-            //             sumImporte = sumImporte +  parseFloat(data.d.results[0].NavIngresos.results[i].Ingreso);
-            //             sumImporteML = sumImporteML + parseFloat(data.d.results[0].NavIngresos.results[i].Total);
-            //             impMoneda = data.d.results[0].NavIngresos.results[i].IngresoMoneda;
-            //         }
-            //         data.d.results[0].SumTotal = sumImporte;
-            //         data.d.results[0].SumTotalMoneda = impMoneda;
-            //         data.d.results[0].SumTotalML = sumImporteML;
-            //     }
-            //     if(data.d.results[0].NavMovimientos.results.length > 0){
-            //         for (var i=0; i < data.d.results[0].NavMovimientos.results.length; i++){
-            //             var year  = data.d.results[0].NavMovimientos.results[i].FechaContabilizacion.substring(0,4);
-            //             var month  = data.d.results[0].NavMovimientos.results[i].FechaContabilizacion.substring(4,6);
-            //             var day  = data.d.results[0].NavMovimientos.results[i].FechaContabilizacion.substring(6,8);
-            //             var fec = day +"-"+ month +"-" + year;
-            //             data.d.results[0].NavMovimientos.results[i].FechaCont = fec;
-            //             year  = data.d.results[0].NavMovimientos.results[i].FechaVencimiento.substring(0,4);
-            //             month  = data.d.results[0].NavMovimientos.results[i].FechaVencimiento.substring(4,6);
-            //             day  = data.d.results[0].NavMovimientos.results[i].FechaVencimiento.substring(6,8);
-            //             var fecVen = day +"-"+ month +"-" + year;
-            //             data.d.results[0].NavMovimientos.results[i].FechaVen = fecVen;
-
-            //         }
-            //     }
-            //     //console.log(data.d.results[0])
-            //     var closeCashModel = new sap.ui.model.json.JSONModel(data.d.results);
-            //     that.getView().setModel(closeCashModel,"cajaModel");
-            // }
+            var that = this;
+            var userdata = sessionStorage.getItem("UserItems") ? JSON.parse(sessionStorage.getItem("UserItems")) :  [];
+            var url = "/sap/opu/odata/sap/Z_CASHBOX_SRV/";
+            var oModel = new sap.ui.model.odata.v2.ODataModel(url, {
+                json: true,
+                loadMetadataAsync: true
+            });
+            var entity="ImpresionQuerySet"
+            var filters=[];
+            filters.push({name:"Segmento", values:[userdata.Segmento]});
+            filters.push({name:"Sociedad", values:[userdata.Sociedad]});
+            filters.push({name:"Caja", values:[userdata.Caja]});
+            filters.push({name:"Usuario", values:[userdata.Usuario]});
+            filters.push({name:"Fecha", values:[userdata.Fecha.replace(/-/g,"")]});
+            var vexpand = "NavQueryMovs"
+            var data = await  this._GEToDataV2ajaxComp(oModel,entity, filters, vexpand,"")
+            if(data.d.results[0].NavQueryMovs.results.length > 0){
+            
+                for (var i=0; i < data.d.results[0].NavQueryMovs.results.length; i++){
+                    var year  = data.d.results[0].NavQueryMovs.results[i].FechaContabillizacion.substring(0,4);
+                    var month  = data.d.results[0].NavQueryMovs.results[i].FechaContabillizacion.substring(4,6);
+                    var day  = data.d.results[0].NavQueryMovs.results[i].FechaContabillizacion.substring(6,8);
+                    var fecConta = day +"-"+ month +"-" + year;
+                    data.d.results[0].NavQueryMovs.results[i].FechaConta = fecConta;
+                    year  = data.d.results[0].NavQueryMovs.results[i].FechaDocumento.substring(0,4);
+                    month  = data.d.results[0].NavQueryMovs.results[i].FechaDocumento.substring(4,6);
+                    day  = data.d.results[0].NavQueryMovs.results[i].FechaDocumento.substring(6,8);
+                    var fecDoc = day +"-"+ month +"-" + year;
+                    data.d.results[0].NavQueryMovs.results[i].FechaDoc = fecDoc;
+                }
+            
+                console.log(data.d.results[0].NavQueryMovs)
+                var movModel = new sap.ui.model.json.JSONModel(data.d.results[0].NavQueryMovs.results);
+                that.getView().setModel(movModel,"MovimientosModel");
+            }
         },
+        _onSearchFieldLiveChange: function (oEvent) {
 
+			var sQuery = oEvent.getParameter("query");
+			this._oGlobalFilter = null;
+			if (sQuery) {
+				this._oGlobalFilter = new Filter([
+					new Filter("CajeroSecuencia", FilterOperator.Contains, sQuery),
+					new Filter("Operacion", FilterOperator.Contains, sQuery),
+					new Filter("Cliente", FilterOperator.Contains, sQuery),
+					new Filter("CuentaBancaria", FilterOperator.Contains, sQuery),
+					new Filter("Documento", FilterOperator.Contains, sQuery),
+					new Filter("Importe", FilterOperator.Contains, sQuery),
+					new Filter("ImporteMoneda", FilterOperator.Contains, sQuery),
+					new Filter("Pagador", FilterOperator.Contains, sQuery),
+					new Filter("ReferenciaPago", FilterOperator.Contains, sQuery),
+					new Filter("ViaPago", FilterOperator.Contains, sQuery),
+					new Filter("BancoCajero", FilterOperator.Contains, sQuery),
+					new Filter("ClaveAutorizacion", FilterOperator.Contains, sQuery),
+					new Filter("FechaDoc", FilterOperator.Contains, sQuery),
+					new Filter("FechaConta", FilterOperator.Contains, sQuery)
+				], false);
+			}
+			this._filter();
+		},
+        _filter: function () {
+			var oFilter = null;
+			if (this._oGlobalFilter) {
+				oFilter = new sap.ui.model.Filter([this._oGlobalFilter], true);
+			} else {
+				oFilter = this._oGlobalFilter;
+			}
+			this.byId("tblMovimientos").getBinding("rows").filter(oFilter, "Application");
+		},
+        downloadExcel: async function () {
+			sap.ui.core.BusyIndicator.show();
+            var that = this;
+            var userdata = sessionStorage.getItem("UserItems") ? JSON.parse(sessionStorage.getItem("UserItems")) :  [];
+            var url = "/sap/opu/odata/sap/Z_CASHBOX_SRV/";
+            var oModel = new sap.ui.model.odata.v2.ODataModel(url, {
+                json: true,
+                loadMetadataAsync: true
+            });
+            var entity="ImpresionQuerySet"
+            var filters=[];
+            filters.push({name:"Segmento", values:[userdata.Segmento]});
+            filters.push({name:"Sociedad", values:[userdata.Sociedad]});
+            filters.push({name:"Caja", values:[userdata.Caja]});
+            filters.push({name:"Usuario", values:[userdata.Usuario]});
+            filters.push({name:"Fecha", values:[userdata.Fecha.replace(/-/g,"")]});
+            var vexpand = "NavQueryMovs"
+            var data = await  this._GEToDataV2ajaxComp(oModel,entity, filters, vexpand,"")
+            if(data.d.results[0].NavQueryMovs.results.length > 0){
+            
+                for (var i=0; i < data.d.results[0].NavQueryMovs.results.length; i++){
+                    var year  = data.d.results[0].NavQueryMovs.results[i].FechaContabillizacion.substring(0,4);
+                    var month  = data.d.results[0].NavQueryMovs.results[i].FechaContabillizacion.substring(4,6);
+                    var day  = data.d.results[0].NavQueryMovs.results[i].FechaContabillizacion.substring(6,8);
+                    var fecConta = day +"-"+ month +"-" + year;
+                    data.d.results[0].NavQueryMovs.results[i].FechaConta = fecConta;
+                    year  = data.d.results[0].NavQueryMovs.results[i].FechaDocumento.substring(0,4);
+                    month  = data.d.results[0].NavQueryMovs.results[i].FechaDocumento.substring(4,6);
+                    day  = data.d.results[0].NavQueryMovs.results[i].FechaDocumento.substring(6,8);
+                    var fecDoc = day +"-"+ month +"-" + year;
+                    data.d.results[0].NavQueryMovs.results[i].FechaDoc = fecDoc;
+                }
+            
+                
+                that._onGetExcel(data.d.results[0].NavQueryMovs.results);
+                sap.ui.core.BusyIndicator.hide();
+            }else{
+                sap.ui.core.BusyIndicator.hide();
+            }
+		},
     });
 });    

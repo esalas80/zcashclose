@@ -3,7 +3,7 @@
 	<SelectDialog id="SelectDialog_Caja" noDataText="No se encontraron Cajas" title="Caja" search="handleSearchCaja"
 		confirm="handleValueCajaHelppress" cancel="handleValueCajaHelppress" items="{path:'catCaja>/', sorter : {path : 'Bukrs'}}"
 		busy="{test>/busyDialog}">
-		<StandardListItem icon="sap-icon://laptop" title="{catCaja>Segment}" description="" info="{catCaja>Segment}" />
+		<StandardListItem icon="sap-icon://laptop" title="{catCaja>Caja}" description="" info="{catCaja>Caja}" />
 	</SelectDialog>
 
 </core:FragmentDefinition>

@@ -49,6 +49,9 @@ sap.ui.define([
                 var mes  = data.d.results[0].Fecha.substring(4,6);
                 var dia  = data.d.results[0].Fecha.substring(6,8);
                 var toDay = dia +"-" + mes + "-" +anio ;
+                userdata.Fecha=anio +"-"+mes+"-"+dia;
+                sessionStorage.removeItem("UserItems");
+                sessionStorage.setItem("UserItems", JSON.stringify(userdata));
                 data.d.results[0].FechaFact = toDay;
                 if(data.d.results[0].NavIngresos.results.length > 0){ 
                     var sumImporte =0.00 ; 
@@ -142,7 +145,7 @@ sap.ui.define([
         },
         
         _onGetQueryPrint:function(){
-            this.getRouter().navTo("queryprinter", {}, true);
+            this.getRouter().navTo("queryprinter");
         }
     });
 
