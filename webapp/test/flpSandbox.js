@@ -40,7 +40,7 @@ sap.ui.define([
 								"tileType": "sap.ushell.ui.tile.StaticTile",
 								"properties": {
 									"title": "Cierre de caja",
-									"targetURL": "#NAMESPACEzcashclose-display"
+									"targetURL": "#GASSzcashclose-display"
 								}
 							}]
 						}]
@@ -51,8 +51,8 @@ sap.ui.define([
 				"adapter": {
 					"config": {
 						"inbounds": {
-							"NAMESPACEzcashclose-display": {
-								"semanticObject": "NAMESPACEzcashclose",
+							"GASSzcashclose-display": {
+								"semanticObject": "GASSzcashclose",
 								"action": "display",
 								"description": "A Fiori application to cash close operations",
 								"title": "Cierre de caja",
@@ -61,8 +61,8 @@ sap.ui.define([
 								},
 								"resolutionResult": {
 									"applicationType": "SAPUI5",
-									"additionalInformation": "SAPUI5.Component=NAMESPACE.zcashclose",
-									"url": sap.ui.require.toUrl("NAMESPACE/zcashclose")
+									"additionalInformation": "SAPUI5.Component=GASS.zcashclose",
+									"url": sap.ui.require.toUrl("GASS/zcashclose")
 								}
 							}
 						}

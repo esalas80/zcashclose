@@ -9,7 +9,7 @@ sap.ui.define([
 ], function (BaseController, JSONModel, History, formatter, Dialog, Fragment,DialogCloseCash) {
     "use strict";
 
-    return BaseController.extend("NAMESPACE.zcashclose.controller.Object", {
+    return BaseController.extend("GASS.zcashclose.controller.Object", {
 
         formatter: formatter,
 
@@ -136,7 +136,7 @@ sap.ui.define([
 				oDialog = new DialogCloseCash(this.oView);
 				this.mDialogs[sDialogName]=oDialog;
 				oDialog.setRouter(this.oRouter);
-				this._oDialog = sap.ui.xmlfragment("NAMESPACE.zcashclose.view.DialogCloseCash", this);
+				this._oDialog = sap.ui.xmlfragment("GASS.zcashclose.view.DialogCloseCash", this);
 				this.getView().addDependent(this._oDialog);	
                 
 			}

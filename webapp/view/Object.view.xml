@@ -1,5 +1,5 @@
 <mvc:View
-    controllerName="NAMESPACE.zcashclose.controller.Object"
+    controllerName="GASS.zcashclose.controller.Object"
 	xmlns:m="sap.m"
 	xmlns:mvc="sap.ui.core.mvc"
     xmlns:u="sap.ui.unified"

@@ -11,7 +11,7 @@ sap.ui.define([
 ], function (BaseController, JSONModel, formatter, Filter, FilterOperator, Fragment, MessageBox, Token, Dialog) {
     "use strict";
 
-    return BaseController.extend("NAMESPACE.zcashclose.controller.Worklist", {
+    return BaseController.extend("GASS.zcashclose.controller.Worklist", {
 
         formatter: formatter,
 
@@ -155,7 +155,7 @@ sap.ui.define([
 				// load asynchronous XML fragment
 				Fragment.load({
 					id: oView.getId(),
-					name: "NAMESPACE.zcashclose.view.SelectDialogSociedad",
+					name: "GASS.zcashclose.view.SelectDialogSociedad",
 					controller: that
 				}).then(function (oDialog) {
 					// connect dialog to the root view of this component (models, lifecycle)
@@ -251,7 +251,7 @@ sap.ui.define([
 				// load asynchronous XML fragment
 				Fragment.load({
 					id: oView.getId(),
-					name: "NAMESPACE.zcashclose.view.SelectDialogSegmento",
+					name: "GASS.zcashclose.view.SelectDialogSegmento",
 					controller: that
 				}).then(function (oDialog) {
 					// connect dialog to the root view of this component (models, lifecycle)
@@ -340,7 +340,7 @@ sap.ui.define([
 				// load asynchronous XML fragment
 				Fragment.load({
 					id: oView.getId(),
-					name: "NAMESPACE.zcashclose.view.SelectDialogCaja",
+					name: "GASS.zcashclose.view.SelectDialogCaja",
 					controller: that
 				}).then(function (oDialog) {
 					// connect dialog to the root view of this component (models, lifecycle)

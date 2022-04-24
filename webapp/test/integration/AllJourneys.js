@@ -8,7 +8,7 @@ sap.ui.define([
 
 	Opa5.extendConfig({
 		arrangements: new Startup(),
-		viewNamespace: "NAMESPACE.zcashclose.view.",
+		viewGASS: "GASS.zcashclose.view.",
 		autoWait: true
 	});
 

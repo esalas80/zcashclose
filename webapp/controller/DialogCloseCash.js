@@ -6,11 +6,11 @@ sap.ui.define([
 	"./BaseController"
 ], function(BaseController, MessageBox, Utilities, Fragment, History, Edit) {
 
-	return BaseController.extend("NAMESPACE.zcashclose.controller.DialogCloseCash", {
-	// return BaseController.extend("NAMESPACE.zcashclose.controller.DialogCloseCash", {
+	return BaseController.extend("GASS.zcashclose.controller.DialogCloseCash", {
+	// return BaseController.extend("GASS.zcashclose.controller.DialogCloseCash", {
 		constructor: function(oView) {
 			this._oView = oView;
-			this._oControl = sap.ui.xmlfragment(oView.getId(), "NAMESPACE.zcashclose.view.DialogCloseCash", this);
+			this._oControl = sap.ui.xmlfragment(oView.getId(), "GASS.zcashclose.view.DialogCloseCash", this);
 			this._bInit = false;
 		},
 
