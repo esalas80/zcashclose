@@ -84,7 +84,7 @@
                             </form:SimpleForm>
 						</layout:BlockLayoutCell>
                         
-						<layout:BlockLayoutCell width="70%"  backgroundColorSet="ColorSet2" backgroundColorShade="ShadeE" >
+						<layout:BlockLayoutCell width="70%"  backgroundColorSet="ColorSet7" backgroundColorShade="ShadeE" >
 							<t:Table id="tableSaldos" rows="{ path: 'cajaModel>/0/NavIngresos/results', sorter: { path: 'Vin', descending: true } }" selectionMode="None"
 								 class="sapUiTinyMarginBottom" visibleRowCount="5"
 								ariaLabelledBy="title">
@@ -157,7 +157,7 @@
 						</layout:BlockLayoutCell>
 					</layout:BlockLayoutRow>
 					<layout:BlockLayoutRow scrollable="false">
-						<layout:BlockLayoutCell   backgroundColorSet="ColorSet2" backgroundColorShade="ShadeE" >
+						<layout:BlockLayoutCell   backgroundColorSet="ColorSet7" backgroundColorShade="ShadeE" >
 							<t:Table id="table" rows="{ path: 'cajaModel>/0/NavMovimientos/results', sorter: { path: 'Indice', descending: true } }" selectionMode="None"
 								rowActionCount="1" class="sapUiTinyMarginBottom" rowSelectionChange=".onPress" visibleRowCount="5"
 								ariaLabelledBy="title">
