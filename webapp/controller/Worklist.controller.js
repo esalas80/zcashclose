@@ -61,9 +61,12 @@ sap.ui.define([
          =================================================================*/
         _onLoginClosingCash:function(){
             var that = this;
-            var sociedad = this.getView().byId("help_Society").getTokens().length > 0 ?  this.getView().byId("help_Society").getTokens()[0].getKey() : "";
-            var segmento = this.getView().byId("help_Div").getTokens().length > 0 ?  this.getView().byId("help_Div").getTokens()[0].getKey() : "";
-            var caja = this.getView().byId("help_Caja").getTokens().length > 0 ?  this.getView().byId("help_Caja").getTokens()[0].getKey() : "";
+			var sociedad = this.getView().byId("help_Society").getValue(); 
+			var segmento = this.getView().byId("help_Div").getValue(); 
+			var caja = this.getView().byId("help_Caja").getValue(); 
+			sociedad = sociedad ===""? this.getView().byId("help_Society").getTokens().length > 0 ?  this.getView().byId("help_Society").getTokens()[0].getKey() : "" : sociedad;
+            segmento = segmento === ""? this.getView().byId("help_Div").getTokens().length > 0 ?  this.getView().byId("help_Div").getTokens()[0].getKey() : "" :segmento;
+            caja = caja ===""? this.getView().byId("help_Caja").getTokens().length > 0 ?  this.getView().byId("help_Caja").getTokens()[0].getKey() : "":caja;
             
             var usuario = this.getView().byId("idUser").getValue();
             if(sociedad === "" || segmento === "" || caja === "" || usuario === ""){
@@ -174,6 +177,8 @@ sap.ui.define([
         handleValueSocHelppress: function (oEvent) {
 			/*eliminar todos los tokens antes de cerrar el the value help*/
 			this.byId("help_Society").removeAllTokens();
+			this.getView().byId("help_Society").setValue("")
+			
 			this.SociedadCodigos = [];
 			var oSelectedItems = oEvent.getParameter("selectedItems"),
 				oInput = this.byId("productInput");
@@ -266,7 +271,7 @@ sap.ui.define([
          * @param  {} oEvent || evento de objeto DOM"
          */
           handleValueSegHelppress: function (oEvent) {
-			/*eliminar todos los tokens antes de cerrar el the value help*/
+			this.getView().byId("help_Div").setValue("")
 			this.byId("help_Div").removeAllTokens();
 			var SegmentosCodigos = [];
 			var oSelectedItems = oEvent.getParameter("selectedItems");
@@ -355,7 +360,7 @@ sap.ui.define([
          * @param  {} oEvent || evento de objeto DOM"
          */
           handleValueCajaHelppress: function (oEvent) {
-			/*eliminar todos los tokens antes de cerrar el the value help*/
+			this.getView().byId("help_Caja").setValue("")
 			this.byId("help_Caja").removeAllTokens();
 			var CajaCodigos = [];
 			var oSelectedItems = oEvent.getParameter("selectedItems");
