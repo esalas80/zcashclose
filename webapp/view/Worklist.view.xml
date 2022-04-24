@@ -30,8 +30,7 @@
 										<MultiInput id="help_Society" width="40%" required="true"  showValueHelp="true" valueHelpOnly="false"  valueStateText="Campo requerido" liveChange="onLiveTextChange" valueHelpRequest="handleSelectSociety" />
 										
 										<Label text="{i18n>Div}"  width="100%" required="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-										<MultiInput id="help_Div" width="40%" required="true"  showValueHelp="true" valueHelpOnly="false"  valueStateText="Campo requerido" liveChange="onLiveTextChange" valueHelpRequest="handleSelectSegmento"/>
-										
+										<MultiInput id="help_Div" width="40%" required="true"  showValueHelp="true" valueHelpOnly="false"  valueStateText="Campo requerido" liveChange="onLiveTextChange" valueHelpRequest="handleSelectSegmento"/>										
 										<Label text="{i18n>Caja}"  width="100%" required="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
 										<MultiInput id="help_Caja" width="40%" required="true"  showValueHelp="true" valueHelpOnly="false"  valueStateText="Campo requerido" liveChange="onLiveTextChange" valueHelpRequest="handleSelectCaja"/>
 
