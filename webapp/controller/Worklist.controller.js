@@ -61,6 +61,7 @@ sap.ui.define([
          =================================================================*/
         _onLoginClosingCash:function(){
             var that = this;
+			sap.ui.getCore().getConfiguration().setLanguage("es-MX");
 			var sociedad = this.getView().byId("help_Society").getValue(); 
 			var segmento = this.getView().byId("help_Div").getValue(); 
 			var caja = this.getView().byId("help_Caja").getValue(); 
