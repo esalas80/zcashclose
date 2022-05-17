@@ -31,7 +31,7 @@
 								</t:extension>
 								<t:columns>
 									<t:Column sortProperty="Usuario" filterProperty="Usuario" width="8rem">
-										<Label text="{i18n>Ind}"/>
+										<Label text="{i18n>Usuario}"/>
 										<t:template>
 											<Text text="{MovimientosModel>Usuario}" wrapping="false"/>
 										</t:template>
