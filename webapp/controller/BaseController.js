@@ -159,7 +159,7 @@ sap.ui.define([
 			}
 
 			var sUrl = environmentSrc + modelURL + entityADD + queryOptions;
-			
+					
 			return new Promise(function(fnResolve, fnReject){
 				$.ajax({
 					url: sUrl,
