@@ -222,14 +222,14 @@ sap.ui.define([
 		//Complemento para downloadExcel
 		createColumns: function () {
 			return [{
-				label: 'Indice',
-				property: 'Indice',
+				label: 'Usuario',
+				property: 'Usuario',
 			}, {
 				label: 'Caja',
 				property: 'CajeroSecuencia',
 			}, {
 				label: 'Operacion',
-				property: 'DecCentro',
+				property: 'Operacion',
 			}, {
 				label: 'Cliente',
 				property: 'Cliente',
@@ -257,7 +257,10 @@ sap.ui.define([
 				property: 'FechaDoc',
                 format: "dd-mm-yyyy"
 			}, {
-				label: 'Banco',
+				label: 'Hora Documento',
+				property: 'HoraDocumento'
+			}, {
+				label: 'Banco/Cajero',
 				property: 'BancoCajero',
 			}, {
 				label: 'Cta. Bancaria',

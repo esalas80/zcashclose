@@ -30,10 +30,10 @@
 									</OverflowToolbar>
 								</t:extension>
 								<t:columns>
-									<t:Column sortProperty="Indice" filterProperty="Indice" width="4rem">
+									<t:Column sortProperty="Usuario" filterProperty="Usuario" width="8rem">
 										<Label text="{i18n>Ind}"/>
 										<t:template>
-											<Text text="{MovimientosModel>Indice}" wrapping="false"/>
+											<Text text="{MovimientosModel>Usuario}" wrapping="false"/>
 										</t:template>
 									</t:Column>
 									<t:Column sortProperty="Caja" filterProperty="Caja" width="7rem">
@@ -97,6 +97,12 @@
 										<Label text="{i18n>FechDocto}"/>
 										<t:template>
 											<Text text="{MovimientosModel>FechaDoc}" wrapping="false"/>
+										</t:template>
+									</t:Column>
+									<t:Column sortProperty="HoraDocumento" filterProperty="HoraDocumento" width="7rem">
+										<Label text="{i18n>HoraDocto}"/>
+										<t:template>
+											<Text text="{MovimientosModel>HoraDocumento}" wrapping="false"/>
 										</t:template>
 									</t:Column>
 									<t:Column sortProperty="BancoCajero" filterProperty="BancoCajero" width="7rem">
