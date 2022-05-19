@@ -114,7 +114,7 @@ sap.ui.define([
 				});
 			});
 		},
-        _GEToDataV2ajaxComp: function(model, entity, filter, expand, select) {
+        _GEToDataV2ajaxComp: function(model, entity, filter, expand, select, language="") {
 			var that = this;
 			var urlAux = new Array();
 			var modelURL = model.sServiceUrl;
@@ -158,8 +158,11 @@ sap.ui.define([
 				queryOptions = queryOptions.slice(0, -1);
 			}
 
-			var sUrl = environmentSrc + modelURL + entityADD + queryOptions;
-			
+			var metadataParams=""
+			if(language !== "" ){
+				metadataParams = "&sap-language='"+language+"'";
+			}
+			var sUrl = environmentSrc + modelURL + entityADD + queryOptions + metadataParams;
 			return new Promise(function(fnResolve, fnReject){
 				$.ajax({
 					url: sUrl,
@@ -222,14 +225,14 @@ sap.ui.define([
 		//Complemento para downloadExcel
 		createColumns: function () {
 			return [{
-				label: 'Indice',
-				property: 'Indice',
+				label: 'Usuario',
+				property: 'Usuario',
 			}, {
 				label: 'Caja',
 				property: 'CajeroSecuencia',
 			}, {
 				label: 'Operacion',
-				property: 'DecCentro',
+				property: 'Operacion',
 			}, {
 				label: 'Cliente',
 				property: 'Cliente',
@@ -256,8 +259,11 @@ sap.ui.define([
 				label: 'Fecha Documento',
 				property: 'FechaDoc',
                 format: "dd-mm-yyyy"
+			},{
+				label: 'Hora Documento',
+				property: 'HoraDocumento',
 			}, {
-				label: 'Banco',
+				label: 'Banco/Cajero',
 				property: 'BancoCajero',
 			}, {
 				label: 'Cta. Bancaria',

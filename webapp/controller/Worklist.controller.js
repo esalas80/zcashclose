@@ -16,6 +16,7 @@ sap.ui.define([
         formatter: formatter,
 
         onInit : function () {
+			sap.ui.getCore().getConfiguration().setLanguage("es-MX");
             var oViewModel;
            // const i18nResBundle = this.getView().getModel("i18n").getResourceBundle();
             // Model used to manipulate control states

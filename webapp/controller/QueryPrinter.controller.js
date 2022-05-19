@@ -12,6 +12,7 @@ sap.ui.define([
     return BaseController.extend("GASS.zcashclose.controller.QueryPrinter", {
         formatter: formatter,
         onInit : function () {
+            sap.ui.getCore().getConfiguration().setLanguage("es-MX");
             // Model used to manipulate control states. The chosen values make sure,
             // detail page shows busy indication immediately so there is no break in
             // between the busy indication for loading the view's meta data
@@ -85,6 +86,11 @@ sap.ui.define([
                     day  = data.d.results[0].NavQueryMovs.results[i].FechaDocumento.substring(6,8);
                     var fecDoc = day +"-"+ month +"-" + year;
                     data.d.results[0].NavQueryMovs.results[i].FechaDoc = fecDoc;
+                    var HH = data.d.results[0].NavQueryMovs.results[i].HoraDocumento.substring(0,2);
+                    var mm = data.d.results[0].NavQueryMovs.results[i].HoraDocumento.substring(2,4);
+                    var ss = data.d.results[0].NavQueryMovs.results[i].HoraDocumento.substring(4,6);
+                    var horaDoc = HH +":"+mm+":"+ss;
+                    data.d.results[0].NavQueryMovs.results[i].HoraDocumento = horaDoc;
                 }
             
                 console.log(data.d.results[0].NavQueryMovs)
@@ -156,6 +162,11 @@ sap.ui.define([
                     day  = data.d.results[0].NavQueryMovs.results[i].FechaDocumento.substring(6,8);
                     var fecDoc = day +"-"+ month +"-" + year;
                     data.d.results[0].NavQueryMovs.results[i].FechaDoc = fecDoc;
+                    var HH = data.d.results[0].NavQueryMovs.results[i].HoraDocumento.substring(0,2);
+                    var mm = data.d.results[0].NavQueryMovs.results[i].HoraDocumento.substring(2,4);
+                    var ss = data.d.results[0].NavQueryMovs.results[i].HoraDocumento.substring(4,6);
+                    var horaDoc = HH +":"+mm+":"+ss;
+                    data.d.results[0].NavQueryMovs.results[i].HoraDocumento = horaDoc;
                 }
             
                 
