@@ -74,7 +74,7 @@ sap.ui.define([
             var vexpand = "NavQueryMovs"
             var data = await  this._GEToDataV2ajaxComp(oModel,entity, filters, vexpand,"")
             if(data.d.results[0].NavQueryMovs.results.length > 0){
-            
+                var granTotal = 0
                 for (var i=0; i < data.d.results[0].NavQueryMovs.results.length; i++){
                     var year  = data.d.results[0].NavQueryMovs.results[i].FechaContabillizacion.substring(0,4);
                     var month  = data.d.results[0].NavQueryMovs.results[i].FechaContabillizacion.substring(4,6);
@@ -92,9 +92,8 @@ sap.ui.define([
                     var horaDoc = HH +":"+mm+":"+ss;
                     data.d.results[0].NavQueryMovs.results[i].HoraDocumento = horaDoc;
                 }
-            
-                console.log(data.d.results[0].NavQueryMovs)
-                var movModel = new sap.ui.model.json.JSONModel(data.d.results[0].NavQueryMovs.results);
+                var newData = this.generatePrintQuery(data.d.results[0].NavQueryMovs.results);
+                var movModel = new sap.ui.model.json.JSONModel(newData);
                 that.getView().setModel(movModel,"MovimientosModel");
             }
         },
@@ -168,9 +167,8 @@ sap.ui.define([
                     var horaDoc = HH +":"+mm+":"+ss;
                     data.d.results[0].NavQueryMovs.results[i].HoraDocumento = horaDoc;
                 }
-            
-                
-                that._onGetExcel(data.d.results[0].NavQueryMovs.results);
+                var newData = this.generatePrintQuery(data.d.results[0].NavQueryMovs.results);
+                that._onGetExcel(newData);
                 sap.ui.core.BusyIndicator.hide();
             }else{
                 sap.ui.core.BusyIndicator.hide();
