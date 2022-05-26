@@ -44,6 +44,7 @@ sap.ui.define([
 				oView.addDependent(oControl);
 			}
 
+			console.log("holi");
 			var args = Array.prototype.slice.call(arguments);
 			if (oControl.open) {
 				oControl.open.apply(oControl, args);
