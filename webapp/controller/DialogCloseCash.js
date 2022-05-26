@@ -44,7 +44,6 @@ sap.ui.define([
 				oView.addDependent(oControl);
 			}
 
-			console.log("holi");
 			var args = Array.prototype.slice.call(arguments);
 			if (oControl.open) {
 				oControl.open.apply(oControl, args);
@@ -116,11 +115,20 @@ sap.ui.define([
 				}
 			}
 		},
+		/********************************************************************
+        *					Change Log										*
+        *	Fecha: 26-05-2022												*
+        *	Descripción: Cierre de caja					                    *
+        *********************************************************************/
+        
 		_onApplyClosure: function(){
 			that = this;
 			var otable=this._oView.byId("tblClose");
 			var tableModel=this._oView.byId("tblClose").getModel("closeCahsModel");
 			var tableData=tableModel.getData();
+			/******************* CHANGE ***********************************/
+			var oRouter =  this.getOwnerComponent().getRouter();
+			/******************* CHANGE ***********************************/
 			if (tableData.length > 0){
 				for (let index = 0; index < tableData.length; index++) {
 					var saldoFin = tableData[index].SaldoFinal;
@@ -191,6 +199,9 @@ sap.ui.define([
 						title: "Éxito",
 						onClose: function(){
 							that._onButtonPress();
+							/******************* CHANGE ***********************************/
+							oRouter.navTo("worklist", {}, true);
+							/******************* CHANGE ***********************************/
 						}
 					});
 				}
