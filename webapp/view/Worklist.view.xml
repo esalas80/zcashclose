@@ -34,8 +34,8 @@
 										<Label text="{i18n>Caja}"  width="100%" required="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
 										<MultiInput id="help_Caja" width="40%" required="true"  showValueHelp="true" valueHelpOnly="false"  valueStateText="Campo requerido" liveChange="onLiveTextChange" valueHelpRequest="handleSelectCaja"/>
 
-                                        <Label text="{i18n>User}"  width="100%" required="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-										<Input id="idUser"  required="true" width="40%" textAlign="Begin" textDirection="Inherit" visible="true" valueStateText="Campo requerido" liveChange="onLiveTextChange"/>
+                                        <!-- <Label text="{i18n>User}"  width="100%" required="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+										<Input id="idUser"  required="true" width="40%" textAlign="Begin" textDirection="Inherit" visible="true" valueStateText="Campo requerido" liveChange="onLiveTextChange"/> -->
 									</form:SimpleForm>
 									<Toolbar width="67%" >
 										<ToolbarSpacer/>

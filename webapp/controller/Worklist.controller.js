@@ -70,23 +70,23 @@ sap.ui.define([
             segmento = segmento === ""? this.getView().byId("help_Div").getTokens().length > 0 ?  this.getView().byId("help_Div").getTokens()[0].getKey() : "" :segmento;
             caja = caja ===""? this.getView().byId("help_Caja").getTokens().length > 0 ?  this.getView().byId("help_Caja").getTokens()[0].getKey() : "":caja;
             
-            var usuario = this.getView().byId("idUser").getValue();
-            if(sociedad === "" || segmento === "" || caja === "" || usuario === ""){
+            //var usuario = this.getView().byId("idUser").getValue();
+            if(sociedad === "" || segmento === "" || caja === "" ){
                 this.getView().byId("help_Society").setValueState("Error");
                 this.getView().byId("help_Div").setValueState("Error");
                 this.getView().byId("help_Caja").setValueState("Error");
-                this.getView().byId("idUser").setValueState("Error");
+                //this.getView().byId("idUser").setValueState("Error");
                 return;
             }
             else{
                 this.getView().byId("help_Society").setValueState("None");
                 this.getView().byId("help_Div").setValueState("None");
                 this.getView().byId("help_Caja").setValueState("None");
-                this.getView().byId("idUser").setValueState("None");
+                //this.getView().byId("idUser").setValueState("None");
             }
             var destination = "/sap/opu/odata/sap/Z_CASHBOX_SRV/";
             var modelo="ValidacionSociedadSet"
-            var query = "(Sociedad='"+ sociedad +"',Segmento='"+ segmento +"',Caja='"+caja+"',Usuario='"+ usuario +"')"
+            var query = "(Sociedad='"+ sociedad +"',Segmento='"+ segmento +"',Caja='"+caja+"')"
             sap.ui.core.BusyIndicator.show();
             
             this._getOdataV2Ajax(destination,modelo,query).then(function(data){
