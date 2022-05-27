@@ -58,6 +58,14 @@ sap.ui.define([
                     var sumImporteML=0.00;
                     var impMoneda="";
                     for (var i=0; i < data.d.results[0].NavIngresos.results.length; i++){
+                        var index = data.d.results[0].NavIngresos.results[i].Ingreso.indexOf("-")
+                        var indexML = data.d.results[0].NavIngresos.results[i].Ingreso.indexOf("-")
+                        if (index > 0){
+                            data.d.results[0].NavIngresos.results[i].Ingreso = -1 * parseFloat(data.d.results[0].NavIngresos.results[i].Ingreso)
+                        }
+                        if (indexML > 0){
+                            data.d.results[0].NavIngresos.results[i].Total = -1 * parseFloat(data.d.results[0].NavIngresos.results[i].Total)
+                        }
                         sumImporte = sumImporte +  parseFloat(data.d.results[0].NavIngresos.results[i].Ingreso);
                         sumImporteML = sumImporteML + parseFloat(data.d.results[0].NavIngresos.results[i].Total);
                         impMoneda = data.d.results[0].NavIngresos.results[i].IngresoMoneda;
@@ -78,6 +86,11 @@ sap.ui.define([
                         day  = data.d.results[0].NavMovimientos.results[i].FechaVencimiento.substring(6,8);
                         var fecVen = day +"-"+ month +"-" + year;
                         data.d.results[0].NavMovimientos.results[i].FechaVen = fecVen;
+                        data.d.results[0].NavMovimientos.results[i].Importe = data.d.results[0].NavMovimientos.results[i].Importe.trim()
+                        var indexNeg = data.d.results[0].NavMovimientos.results[i].Importe.indexOf("-")
+                        if(indexNeg > 0) {
+                            data.d.results[0].NavMovimientos.results[i].Importe = (-1 * (data.d.results[0].NavMovimientos.results[i].Importe.replace("-",""))).toString();
+                        }
 
                     }
                 }

@@ -108,10 +108,9 @@ sap.ui.define([
 			var data = otable.getModel("closeCahsModel").getData();
 			var tableModel=this._oView.byId("tblClose").getModel("closeCahsModel");
 			if(data.length > 0){
-				for (let i = 0; i < data.length; i++) {
-					debugger
-					tableModel.setProperty("/"+ i +"/SaldoFinal",tableModel.getProperty("/"+ i +"/Importe").trim());
-					tableModel.setProperty("/"+ i +"/ImportePerdido",tableModel.getProperty("/"+ i +"/Importe").trim());
+				for (let i = 0; i < data.length; i++) {					
+					tableModel.setProperty("/"+ i +"/SaldoFinal",typeof(tableModel.getProperty("/"+ i +"/Importe")) === 'string'?tableModel.getProperty("/"+ i +"/Importe").trim():tableModel.getProperty("/"+ i +"/Importe").toString());
+					tableModel.setProperty("/"+ i +"/ImportePerdido", typeof(tableModel.getProperty("/"+ i +"/Importe"))==='string'?tableModel.getProperty("/"+ i +"/Importe").trim():tableModel.getProperty("/"+ i +"/Importe").toString());
 				}
 			}
 		},
@@ -165,13 +164,13 @@ sap.ui.define([
 						"Moneda" : dataTable[i].ImporteMoneda,
 						"MetodoPago" : dataTable[i].ViaPago,
 						"MetodoDesc" : "",
-						"Importe" : dataTable[i].Importe.trim().replace(/,/g, ","),
+						"Importe" : dataTable[i].Importe.toString().trim().replace(/,/g, ","),
 						"Banco" : "",
 						"Cheque" : "",
 						"Fecha" : fec,
 						"CveAutorizacion" : dataTable[i].ClaveAutorizacion,
 						"Pagador" : dataTable[i].Pagador,
-						"ImportePerdido" :  dataTable[i].Importe.trim().replace(/,/g, ","),
+						"ImportePerdido" :  dataTable[i].Importe.toString().trim().replace(/,/g, ","),
 						"Diferencia" : "00.0"
 					}
 					Movements.push(itemMovement)
@@ -186,7 +185,6 @@ sap.ui.define([
 				"EvDescription" : "",
 				"CashClosingMov" : Movements
 			}
-
 			sap.ui.core.BusyIndicator.show();
 			var modelClose = this._oView.getModel();
 			this._CreateCloseChasV2("/CashClosingSet", jsondata).then(function(dataResp){

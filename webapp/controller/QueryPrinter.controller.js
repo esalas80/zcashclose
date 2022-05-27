@@ -73,6 +73,7 @@ sap.ui.define([
             filters.push({name:"Fecha", values:[userdata.Fecha.replace(/-/g,"")]});
             var vexpand = "NavQueryMovs"
             var data = await  this._GEToDataV2ajaxComp(oModel,entity, filters, vexpand,"")
+            console.log(data.d)
             if(data.d.results[0].NavQueryMovs.results.length > 0){
                 var granTotal = 0
                 for (var i=0; i < data.d.results[0].NavQueryMovs.results.length; i++){
@@ -91,6 +92,10 @@ sap.ui.define([
                     var ss = data.d.results[0].NavQueryMovs.results[i].HoraDocumento.substring(4,6);
                     var horaDoc = HH +":"+mm+":"+ss;
                     data.d.results[0].NavQueryMovs.results[i].HoraDocumento = horaDoc;
+                    var indexNeg = data.d.results[0].NavQueryMovs.results[i].Importe.indexOf("-")
+                    if(indexNeg > 0) {
+                        data.d.results[0].NavQueryMovs.results[i].Importe = (-1 * (data.d.results[0].NavQueryMovs.results[i].Importe.replace("-",""))).toString();
+                    }
                 }
                 var newData = this.generatePrintQuery(data.d.results[0].NavQueryMovs.results);
                 var movModel = new sap.ui.model.json.JSONModel(newData);
@@ -166,6 +171,11 @@ sap.ui.define([
                     var ss = data.d.results[0].NavQueryMovs.results[i].HoraDocumento.substring(4,6);
                     var horaDoc = HH +":"+mm+":"+ss;
                     data.d.results[0].NavQueryMovs.results[i].HoraDocumento = horaDoc;
+                    var indexNeg = data.d.results[0].NavQueryMovs.results[i].Importe.indexOf("-")
+                    if(indexNeg > 0) {
+                        data.d.results[0].NavQueryMovs.results[i].Importe = (-1 * (data.d.results[0].NavQueryMovs.results[i].Importe.replace("-",""))).toString();
+                    }
+                    
                 }
                 var newData = this.generatePrintQuery(data.d.results[0].NavQueryMovs.results);
                 that._onGetExcel(newData);

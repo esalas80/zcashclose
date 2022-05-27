@@ -12,7 +12,7 @@
 							<layout:content>
 								<layout:BlockLayoutCell backgroundColorSet="ColorSet1" >
 									<layout:content>
-                                        <t:Table id="tblClose" rows="{ path: 'closeCahsModel>/', sorter: { path: 'Indice', descending: true } }" selectionMode="None"
+                                        <t:Table id="tblClose" rows="{ path: 'closeCahsModel>/', sorter: { path: 'Indice', ascending: true } }" selectionMode="None"
                                             rowActionCount="1" class="sapUiTinyMarginBottom" visibleRowCount="5"
                                             ariaLabelledBy="title">
                                             
