@@ -53,7 +53,7 @@ sap.ui.define([
             var otable=this._oView.byId("tblClose");
 			var model = this._oView.getModel("cajaModel");
 			var data = model.getData()[0].NavMovimientos.results;
-			debugger
+	
 			if(data.length > 0){
 				for (let index = 0; index < data.length; index++) {
 					data[index].Descricpcion="";
@@ -157,7 +157,6 @@ sap.ui.define([
 				for (let i= 0; i < dataTable.length; i++) {
 					var arrFec = dataTable[i].FechaVen.split("-");
 					var fec=arrFec[2]+arrFec[1]+arrFec[0];
-					debugger
 					var itemMovement = {
 						"Caja" : dataTable[i].Caja,
 						"Indice" : dataTable[i].Indice,
@@ -187,7 +186,6 @@ sap.ui.define([
 			}
 			sap.ui.core.BusyIndicator.show();
 			var modelClose = this._oView.getModel();
-			debugger
 			this._CreateCloseChasV2("/CashClosingSet", jsondata).then(function(dataResp){
 				var resp = dataResp.data;
 				var message = resp.EvDescription != undefined? resp.EvDescription: "";
