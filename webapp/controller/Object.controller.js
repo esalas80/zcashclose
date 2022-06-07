@@ -40,8 +40,8 @@ sap.ui.define([
             var filters=[];
             filters.push({name:"Segmento", values:[userdata.Segmento]});
             filters.push({name:"Sociedad", values:[userdata.Sociedad]});
-            filters.push({name:"Caja", values:[userdata.Caja]});
-            filters.push({name:"Usuario", values:[userdata.Usuario]});
+            filters.push({name:"Caja", values:['ADM2']});
+            filters.push({name:"Usuario", values:['JMENDOZA']});
             var vexpand = "NavIngresos,NavMovimientos"
             var data = await  this._GEToDataV2ajaxComp(oModel,entity, filters, vexpand,"")
             if(data.d.results.length > 0){
@@ -94,7 +94,7 @@ sap.ui.define([
 
                     }
                 }
-                //console.log(data.d.results[0])
+                console.log(data.d.results[0])
                 var closeCashModel = new sap.ui.model.json.JSONModel(data.d.results);
                 that.getView().setModel(closeCashModel,"cajaModel");
             }
