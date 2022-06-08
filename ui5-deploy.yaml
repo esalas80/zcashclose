@@ -18,6 +18,6 @@ builder:
           client: "100"
         app:
           name: ZCASHCLOSE
-          description: Fori app to cash closing operations
+          description: Cierre de caja
           package: ZISH
-          transport: DG1K902310
+          transport: DG1K903378

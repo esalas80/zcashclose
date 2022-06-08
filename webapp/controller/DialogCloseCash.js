@@ -162,7 +162,7 @@ sap.ui.define([
 						"Indice" : dataTable[i].Indice,
 						"Moneda" : dataTable[i].ImporteMoneda,
 						"MetodoPago" : dataTable[i].ViaPago,
-						"MetodoDesc" : dataTable[i].Descripcion,
+						"MetodoDesc" : "",
 						"Importe" : dataTable[i].Importe.toString().trim().replace(/,/g, ","),
 						"Banco" : dataTable[i].Banco,
 						"Cheque" : dataTable[i].Cheque,
