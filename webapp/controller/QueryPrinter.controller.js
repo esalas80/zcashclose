@@ -11,6 +11,7 @@ sap.ui.define([
     "use strict"
     return BaseController.extend("GASS.zcashclose.controller.QueryPrinter", {
         formatter: formatter,
+        
         onInit : function () {
             sap.ui.getCore().getConfiguration().setLanguage("es-MX");
             // Model used to manipulate control states. The chosen values make sure,
@@ -184,5 +185,104 @@ sap.ui.define([
                 sap.ui.core.BusyIndicator.hide();
             }
 		},
+
+        headRows: function() {
+        return [
+            { caja: 'Caja', 
+            cliente: 'Cliente', 
+            vp: 'Vía Pago', 
+            refpago: 'Ref Pago', 
+            importe: 'Importe',
+            Documento: 'Documento',
+            fechaConta: 'Fecha Contab',
+            banco: 'Banco',
+            cuentaBanc: 'Cta. Banc',
+            clave: 'Cve. Autorizacion',
+            pagador: 'Pagador' }
+        ]
+      
+        },
+        onDataExportPDF:function(oEvent){  
+            debugger;
+            
+            var userdata = sessionStorage.getItem("UserItems") ? JSON.parse(sessionStorage.getItem("UserItems")) :  [];
+            var ModelData = this.getView().getModel("MovimientosModel").getData();
+            var doc = new jsPDF({
+                orientation: "landscape"
+            }); 
+            
+            doc.setFontSize(18)
+            doc.text(
+                'REPORTE DE MOVIMIENTOS', 100, 18)
+            doc.setFontSize(11)
+            doc.setTextColor(80)
+
+            // jsPDF 1.4+ uses getWidth, <1.4 uses .width
+            doc.text("CAJA: " + userdata.Caja, 70, 28)
+            doc.text("USUARIO: " + userdata.Usuario, 120, 28)
+            doc.text("FECHA: " + userdata.Fecha, 180, 28)
+            var data = [];  
+                for(var i=0;i<ModelData.length;i++)   
+                {  
+                    const formatter = new Intl.NumberFormat('en-US', {
+                        style: 'currency',
+                        currency: ModelData[i].ImporteMoneda,
+                        minimumFractionDigits: 2
+                      });
+                     var importe =  formatter.format(ModelData[i].Importe);
+                    data[i]=[
+                            ModelData[i].CajeroSecuencia,
+                            ModelData[i].Cliente,
+                            ModelData[i].ViaPago,
+                            ModelData[i].ReferenciaPago,
+                            importe,
+                            ModelData[i].Documento,
+                            ModelData[i].FechaConta,
+                            ModelData[i].BancoCajero,
+                            ModelData[i].CuentaBancaria,
+                            ModelData[i].ClaveAutorizacion,
+                            ModelData[i].Pagador
+                            ];  
+                }
+            var lastRow = ModelData.length + 1;
+            data[ModelData.length] = [
+                "","","","", "","","","","","","", ""
+            ] ; 
+            const formatter = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: ModelData[0].ImporteMoneda,
+                minimumFractionDigits: 2
+              });
+
+            var importeTotal =  formatter.format(ModelData[0].SumTotal);
+
+            data[lastRow] = [
+                "Totales","","","", importeTotal,"","","","","","", ""
+            ] ; 
+            doc.autoTable({
+                head: this.headRows(),
+                body: data,
+                theme: 'grid',
+                startY: 35,
+                showHead: 'firstPage',
+                headStyles: { fillColor: [0, 0, 139] },
+                styles: { cellPadding: 0.5, fontSize: 8 },
+                columnStyles: {
+                                importe: {
+                                    halign: 'right',
+                                },
+                                vp: {
+                                    halign: 'center',
+                                }
+                            }   
+
+            }); 
+            var dtValue = new Date();
+            var fileName = "RptMovimientos_" + String(dtValue.getDate()) + String(dtValue.getMonth()+1) + String(dtValue.getFullYear()) + String(dtValue.getHours()) + String(dtValue.getMinutes());
+            doc.save(fileName);  
+            
+      
+        }  
+        
     });
 });    

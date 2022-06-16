@@ -9,11 +9,13 @@
         "sapui5"
     ],
     "main": "webapp/index.html",
-    "dependencies": {},
+    "dependencies": {
+        "jspdf": "^2.5.1"
+    },
     "devDependencies": {
-        "@ui5/cli": "^2.14.1",
-        "@sap/ux-ui5-tooling": "1",
         "@sap/ux-ui5-fe-mockserver-middleware": "1",
+        "@sap/ux-ui5-tooling": "1",
+        "@ui5/cli": "^2.14.1",
         "rimraf": "3.0.2"
     },
     "scripts": {
