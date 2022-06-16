@@ -192,6 +192,7 @@ sap.ui.define([
             cliente: 'Cliente', 
             vp: 'Vía Pago', 
             refpago: 'Ref Pago', 
+            moneda: 'Moneda',
             importe: 'Importe',
             Documento: 'Documento',
             fechaConta: 'Fecha Contab',
@@ -224,17 +225,14 @@ sap.ui.define([
             var data = [];  
                 for(var i=0;i<ModelData.length;i++)   
                 {  
-                    const formatter = new Intl.NumberFormat('en-US', {
-                        style: 'currency',
-                        currency: ModelData[i].ImporteMoneda,
-                        minimumFractionDigits: 2
-                      });
-                     var importe =  formatter.format(ModelData[i].Importe);
+                    var importe = ModelData[i].Importe.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    importe =  importe.split(" ").join(""); 
                     data[i]=[
                             ModelData[i].CajeroSecuencia,
                             ModelData[i].Cliente,
                             ModelData[i].ViaPago,
                             ModelData[i].ReferenciaPago,
+                            ModelData[i].ImporteMoneda,
                             importe,
                             ModelData[i].Documento,
                             ModelData[i].FechaConta,
@@ -248,16 +246,11 @@ sap.ui.define([
             data[ModelData.length] = [
                 "","","","", "","","","","","","", ""
             ] ; 
-            const formatter = new Intl.NumberFormat('en-US', {
-                style: 'currency',
-                currency: ModelData[0].ImporteMoneda,
-                minimumFractionDigits: 2
-              });
-
-            var importeTotal =  formatter.format(ModelData[0].SumTotal);
+            var importeTotal = ModelData[0].SumTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            importeTotal =  importeTotal.split(" ").join(""); 
 
             data[lastRow] = [
-                "Totales","","","", importeTotal,"","","","","","", ""
+                "Totales","","","", "",importeTotal,"","","","","","", ""
             ] ; 
             doc.autoTable({
                 head: this.headRows(),
@@ -265,7 +258,7 @@ sap.ui.define([
                 theme: 'grid',
                 startY: 35,
                 showHead: 'firstPage',
-                headStyles: { fillColor: [0, 0, 139] },
+                headStyles: { fillColor: [0, 93, 169] },
                 styles: { cellPadding: 0.5, fontSize: 8 },
                 columnStyles: {
                                 importe: {
