@@ -204,7 +204,6 @@ sap.ui.define([
       
         },
         onDataExportPDF:function(oEvent){  
-            debugger;
             
             var userdata = sessionStorage.getItem("UserItems") ? JSON.parse(sessionStorage.getItem("UserItems")) :  [];
             var ModelData = this.getView().getModel("MovimientosModel").getData();
@@ -217,8 +216,6 @@ sap.ui.define([
                 'REPORTE DE MOVIMIENTOS', 100, 18)
             doc.setFontSize(11)
             doc.setTextColor(80)
-
-            // jsPDF 1.4+ uses getWidth, <1.4 uses .width
             doc.text("CAJA: " + userdata.Caja, 70, 28)
             doc.text("USUARIO: " + userdata.Usuario, 120, 28)
             doc.text("FECHA: " + userdata.Fecha, 180, 28)
@@ -243,15 +240,11 @@ sap.ui.define([
                             ];  
                 }
             var lastRow = ModelData.length + 1;
-            data[ModelData.length] = [
-                "","","","", "","","","","","","", ""
-            ] ; 
+            data[ModelData.length] = ["","","","", "","","","","","","", ""] ; 
             var importeTotal = ModelData[0].SumTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             importeTotal =  importeTotal.split(" ").join(""); 
 
-            data[lastRow] = [
-                "Totales","","","", "",importeTotal,"","","","","","", ""
-            ] ; 
+            data[lastRow] = ["Totales","","","", "",importeTotal,"","","","","","", ""] ; 
             doc.autoTable({
                 head: this.headRows(),
                 body: data,
@@ -261,15 +254,12 @@ sap.ui.define([
                 headStyles: { fillColor: [0, 93, 169] },
                 styles: { cellPadding: 0.5, fontSize: 8 },
                 columnStyles: {
-                                importe: {
-                                    halign: 'right',
-                                },
-                                vp: {
-                                    halign: 'center',
-                                }
-                            }   
+                    importe: { halign: 'right'},
+                    vp: {halign: 'center'}
+                }   
 
             }); 
+            
             var dtValue = new Date();
             var fileName = "RptMovimientos_" + String(dtValue.getDate()) + String(dtValue.getMonth()+1) + String(dtValue.getFullYear()) + String(dtValue.getHours()) + String(dtValue.getMinutes());
             doc.save(fileName);  
