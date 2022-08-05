@@ -308,6 +308,7 @@ sap.ui.define([
 					Importe:  vDataGroup[index].Importe,
 					ImporteMoneda: vDataGroup[index].ImporteMoneda,
 					ImporteUSD: vDataGroup[index].ImporteUSD,
+					ImporteCheckIn: vDataGroup[index].ImporteCheckIn,
 					Indice: vDataGroup[index].Indice,
 					Operacion: vDataGroup[index].Operacion,
 					Pagador: vDataGroup[index].Pagador,
@@ -333,6 +334,7 @@ sap.ui.define([
 						Importe: totalGrupo.toFixed(3) ,
 						ImporteMoneda: vDataGroup[index].ImporteMoneda,
 						ImporteUSD: vDataGroup[index].ImporteUSD,
+						ImporteCheckIn: vDataGroup[index].ImporteCheckIn,
 						Indice: "",
 						Operacion: "",
 						Pagador: "",
@@ -345,8 +347,9 @@ sap.ui.define([
 					newData.push(objTotal)
 					totalGrupo=0;
 				}
-				totalGrupo += parseFloat(vDataGroup[index].Importe.trim());
-				granTotal += parseFloat(vDataGroup[index].Importe.trim());
+				
+				totalGrupo += vDataGroup[index].Operacion !== "CHACK IN"? parseFloat(vDataGroup[index].Importe.trim()): 0 ;
+				granTotal += vDataGroup[index].Operacion !== "CHACK IN"? parseFloat(vDataGroup[index].Importe.trim()): 0;
 				newData.push(objQueryMov)
 				viaPagoAnt= vDataGroup[index].ViaPago;
 				cajeroAnt= vDataGroup[index].BancoCajero;
@@ -367,6 +370,7 @@ sap.ui.define([
 						Importe: totalGrupo.toFixed(3) ,
 						ImporteMoneda: vDataGroup[index].ImporteMoneda,
 						ImporteUSD: vDataGroup[index].ImporteUSD,
+						ImporteCheckIn: vDataGroup[index].ImporteCheckIn,
 						Indice: "",
 						Operacion: "",
 						Pagador: "",

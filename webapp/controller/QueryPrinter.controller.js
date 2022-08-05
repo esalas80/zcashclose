@@ -97,6 +97,10 @@ sap.ui.define([
                     if(indexNeg > 0) {
                         data.d.results[0].NavQueryMovs.results[i].Importe = (-1 * (data.d.results[0].NavQueryMovs.results[i].Importe.replace("-",""))).toString();
                     }
+                    if(data.d.results[0].NavQueryMovs.results[i].Operacion === "CHECK IN"){
+                        data.d.results[0].NavQueryMovs.results[i].Importe = "0"
+
+                    }
                 }
                 var newData = this.generatePrintQuery(data.d.results[0].NavQueryMovs.results);
                 var movModel = new sap.ui.model.json.JSONModel(newData);
@@ -176,7 +180,9 @@ sap.ui.define([
                     if(indexNeg > 0) {
                         data.d.results[0].NavQueryMovs.results[i].Importe = (-1 * (data.d.results[0].NavQueryMovs.results[i].Importe.replace("-",""))).toString();
                     }
-                    
+                    if(data.d.results[0].NavQueryMovs.results[i].Operacion === "CHECK IN"){
+                        data.d.results[0].NavQueryMovs.results[i].Importe = "0"
+                    }
                 }
                 var newData = this.generatePrintQuery(data.d.results[0].NavQueryMovs.results);
                 that._onGetExcel(newData);
@@ -194,6 +200,7 @@ sap.ui.define([
             refpago: 'Ref Pago', 
             moneda: 'Moneda',
             importe: 'Importe',
+            importeCheckIn: 'Importe Check In',
             Documento: 'Documento',
             fechaConta: 'Fecha Contab',
             banco: 'Banco',
@@ -231,6 +238,7 @@ sap.ui.define([
                             ModelData[i].ReferenciaPago,
                             ModelData[i].ImporteMoneda,
                             importe,
+                            ModelData[i].ImporteCheckIn,
                             ModelData[i].Documento,
                             ModelData[i].FechaConta,
                             ModelData[i].BancoCajero,
@@ -240,7 +248,7 @@ sap.ui.define([
                             ];  
                 }
             var lastRow = ModelData.length + 1;
-            data[ModelData.length] = ["","","","", "","","","","","","", ""] ; 
+            data[ModelData.length] = ["","","","", "","","","","","","", "", ""] ; 
             var importeTotal = ModelData[0].SumTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             importeTotal =  importeTotal.split(" ").join(""); 
 
