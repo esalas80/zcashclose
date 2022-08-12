@@ -203,6 +203,7 @@ sap.ui.define([
 					});
 				}
 				else{
+					sap.ui.core.BusyIndicator.hide();
 					MessageBox.error("Error al solicitar cierre de caja", {
 						icon: MessageBox.Icon.ERROR,
 						title: "Error",

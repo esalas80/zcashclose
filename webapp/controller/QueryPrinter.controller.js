@@ -234,22 +234,22 @@ sap.ui.define([
                     var importe = ModelData[i].Importe.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                     importe =  importe.split(" ").join(""); 
                     data[i]=[
-                            ModelData[i].CajeroSecuencia,
-                            ModelData[i].Cliente,
-                            ModelData[i].ViaPago,
-                            ModelData[i].ReferenciaPago,
-                            ModelData[i].ImporteMoneda,
-                            importe,
-                            ModelData[i].ImporteCheckIn,
-                            ModelData[i].EstatusCheckIn,
-                            ModelData[i].Seguimiento,
-                            ModelData[i].Documento,
-                            ModelData[i].FechaConta,
-                            ModelData[i].BancoCajero,
-                            ModelData[i].CuentaBancaria,
-                            ModelData[i].ClaveAutorizacion,
-                            ModelData[i].Pagador
-                            ];  
+                        ModelData[i].CajeroSecuencia,
+                        ModelData[i].Cliente,
+                        ModelData[i].ViaPago,
+                        ModelData[i].ReferenciaPago,
+                        ModelData[i].ImporteMoneda,
+                        importe,
+                        ModelData[i].ImporteCheckIn,
+                        ModelData[i].EstatusCheckIn,
+                        ModelData[i].Seguimiento,
+                        ModelData[i].Documento,
+                        ModelData[i].FechaConta,
+                        ModelData[i].BancoCajero,
+                        ModelData[i].CuentaBancaria,
+                        ModelData[i].ClaveAutorizacion,
+                        ModelData[i].Pagador
+                    ];  
                 }
             var lastRow = ModelData.length + 1;
             data[ModelData.length] = ["","","","", "","","","","","","", "", "", "", ""] ; 
